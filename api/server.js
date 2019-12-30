@@ -13,9 +13,7 @@ app.listen(process.env.PORT || 3001, () => {
     console.log("Server is running");
 })
 
-app.use(function(err, req, res, next) {
-    console.error(err.message);
-    if (!err.statusCode) err.statusCode = 500; 
-    res.status(err.statusCode).send(err.message); 
+app.use(function(req, res, next) {
+    return res.status(404).send({ error: `Route ${req.url} Not found.` });
 });
 module.exports = app
